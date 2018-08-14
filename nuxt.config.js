@@ -10,18 +10,21 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
   /*
   ** Global CSS
   */
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css',
+    { src: 'vuetify/dist/vuetify.min.css', lang: 'css' }
+  ],
   /*
   ** Add axios globally
   */
   build: {
-    vendor: ['axios'],
+    vendor: ['axios', 'socket.io-client', 'vuetify'],
     /*
     ** Run ESLINT on save
     */
@@ -36,8 +39,17 @@ module.exports = {
       }
     }
   },
+
+  env: {
+    HOST_URL: process.env.HOST_URL || 'localhost:3000'
+  },
+
+  modules: ['~/io'],
+
+  plugins: ['~/plugins/vuetify'],
+
   serverMiddleware: [
     // API middleware
-    '~/api/index.js'
+    '~/api/index.js',
   ]
 }
