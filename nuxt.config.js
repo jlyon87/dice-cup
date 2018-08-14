@@ -24,7 +24,14 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'socket.io-client', 'vuetify'],
+    vendor: [
+      'axios',
+      'socket.io-client',
+      'vuetify',
+      'firebase/app',
+      'firebase/auth',
+      'firebase/database'
+    ],
     /*
     ** Run ESLINT on save
     */
@@ -46,7 +53,9 @@ module.exports = {
 
   modules: ['~/io'],
 
-  plugins: ['~/plugins/vuetify'],
+  plugins: [
+    '~/plugins/vuetify',
+  ],
 
   serverMiddleware: [
     // API middleware
