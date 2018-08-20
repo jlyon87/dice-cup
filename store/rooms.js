@@ -10,7 +10,15 @@ const getters = {
   currentRoom: state => state.currentRoom
 }
 
-const mutations = {}
+const mutations = {
+  rooms (state, newRooms) {
+    state.rooms = newRooms
+  },
+
+  currentRoom (state, newRoom) {
+    state.currentRoom = newRoom
+  }
+}
 
 const actions = {}
 

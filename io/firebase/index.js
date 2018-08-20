@@ -31,7 +31,7 @@ const createRoom = newRoom => {
 const monitorRooms = () => {
   return new Promise((resolve, reject) => {
     db.ref('rooms/').on('value', snapshot => {
-      if(!snapshot) return reject(new Error('Error retrieving rooms.'))
+      if (!snapshot) return reject(new Error('Error retrieving rooms.'))
 
       console.log('snapshot resolving', snapshot.val())
       resolve(snapshot.val())
