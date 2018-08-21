@@ -1,9 +1,17 @@
 <template>
   <v-card>
-    <v-card-title>
-      <v-icon>meeting_room</v-icon>
-      Create Room
-    </v-card-title>
+    <v-list>
+      <v-list-tile>
+        <v-list-tile-action>
+          <v-icon>meeting_room</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>
+            Create Room
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
 
     <v-form>
       <v-container>
@@ -25,14 +33,13 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
+import socket from '~/plugins/socket-io'
 
 const CREATE_ROOM = 'createRoom'
 
 export default {
   data () {
     return {
-      socket: '',
       roomName: ''
     }
   },
@@ -42,14 +49,12 @@ export default {
 
     },
     createRoom () {
-      this.socket.emit(CREATE_ROOM, { name: this.roomName, uid: 'justin' })
+      socket.emit(CREATE_ROOM, { name: this.roomName, uid: 'justin' })
     }
   },
 
   mounted () {
-    this.socket = io()
-
-    this.socket.on(CREATE_ROOM, data => {
+    socket.on(CREATE_ROOM, data => {
       console.log(CREATE_ROOM, data)
     })
   }

@@ -19,7 +19,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat @click="join" to="/rooms" >Enter</v-btn>
+            <v-btn flat @click="join" >Enter</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -36,12 +38,15 @@ export default {
   },
 
   created () {
-    console.log(this.$router.options.routes)
+    // console.log(this.$router.options.routes)
   },
 
   methods: {
+    ...mapMutations(['user']),
+
     join () {
-      console.log('joining', this.userName)
+      this.user({ name: this.userName })
+      this.$router.push('/rooms')
     }
   }
 }

@@ -6,9 +6,12 @@
           <v-card-title>Join Room</v-card-title>
 
           <v-list>
-            <v-list-tile v-for="room in rooms" :key="room.id" >
+            <v-list-tile v-for="room in rooms" :key="room.id" @click="">
+              <v-list-tile-action>
+                <v-icon>meeting_room</v-icon>
+              </v-list-tile-action>
               <v-list-tile-content>
-                <h3>{{ room.name }}</h3>
+                <v-list-tile-title>{{ room.name }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>
@@ -24,7 +27,7 @@
 
 <script>
 import CreateRoom from '~/components/CreateRoom'
-import io from 'socket.io-client'
+import socket from '~/plugins/socket-io'
 
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -33,7 +36,6 @@ const GET_ROOMS = 'getRooms'
 export default {
   data () {
     return {
-      socket: {}
     }
   },
 
@@ -65,9 +67,8 @@ export default {
 
   mounted () {
     console.log('mounted')
-    this.socket = io()
-    this.socket.emit(GET_ROOMS, '')
-    this.socket.on(GET_ROOMS, this.assignRooms)
+    socket.emit(GET_ROOMS, '')
+    socket.on(GET_ROOMS, this.setRooms)
   }
 }
 </script>

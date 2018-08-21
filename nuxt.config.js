@@ -48,17 +48,21 @@ module.exports = {
   },
 
   env: {
-    HOST_URL: process.env.HOST_URL || 'localhost:3000'
+    WS_URL: process.env.WS_URL || 'http://localhost:3000'
   },
-
-  modules: ['~/io'],
 
   plugins: [
     '~/plugins/vuetify',
+    '~/plugins/socket-io.js'
   ],
 
   serverMiddleware: [
     // API middleware
-    '~/api/index.js',
-  ]
+    '~/server',
+    '~/server/io'
+  ],
+
+  router: {
+    middleware: 'register'
+  }
 }

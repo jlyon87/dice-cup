@@ -13,7 +13,7 @@
 <script>
 import Header from '~/components/Header'
 import Footer from '~/components/Footer'
-import io from 'socket.io-client'
+import socket from '~/plugins/socket-io'
 
 export default {
   components: {
@@ -22,7 +22,7 @@ export default {
   },
 
   mounted () {
-    window.socket = io()
+    window.socket = socket
   }
 }
 </script>
